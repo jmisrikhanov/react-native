@@ -6,11 +6,11 @@ const App = () => {
 
   return (
     <SafeAreaView>
-      <View style={{backgroundColor: 'red'}}>
+      <View style={styles.container}>
         <Text>Hello World</Text>
         <Text>Hello World 2</Text>
       </View>
-      <Text style={{color: 'blue'}}>Hello World 3</Text>
+      <Text>Hello World 3</Text>
       <Button
         onPress={() => alertOutput('Jack')}
         title="press"
@@ -20,5 +20,14 @@ const App = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'green',
+    margin: 10,
+    padding: 10,
+    borderRadius: 5,
+  },
+});
 
 export default App;
