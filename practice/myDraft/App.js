@@ -6,21 +6,16 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.upper_view_container}>
-        <Text>Hello World</Text>
-      </View>
-      <View style={styles.center_view_container}>
-        <Text>Hello World 2</Text>
-      </View>
-      <View style={styles.bottom_view_container}>
-        <Text>Hello World 3</Text>
-      </View>
-      <Button
+      <View style={styles.box_1}></View>
+      <View style={styles.box_2}></View>
+      <View style={styles.box_3}></View>
+      <View style={styles.box_4}></View>
+      {/* <Button
         onPress={() => alertOutput('Jack')}
         title="press"
         disabled={false}
         color="blue"
-      />
+      /> */}
     </SafeAreaView>
   );
 };
@@ -28,19 +23,30 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
+    backgroundColor: 'yellow',
+    justifyContent: 'space-evenly' /*for x-direction in row*/,
+    alignItems: 'center' /*for y-direction in row*/,
   },
-  upper_view_container: {
-    flex: 3,
+  box_1: {
+    width: 75,
+    height: 75,
     backgroundColor: 'red',
   },
-  center_view_container: {
-    flex: 6,
-    backgroundColor: 'purple',
+  box_2: {
+    width: 75,
+    height: 75,
+    backgroundColor: 'blue',
   },
-  bottom_view_container: {
-    flex: 10,
-    backgroundColor: 'green',
+  box_3: {
+    width: 75,
+    height: 75,
+    backgroundColor: 'aqua',
+  },
+  box_4: {
+    width: 75,
+    height: 75,
+    backgroundColor: 'orange',
   },
 });
 
