@@ -1,4 +1,4 @@
-// *********************Lifecycle part2******************
+// *********************Lifecycle part2 clean up******************
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, Button, View} from 'react-native';
 
