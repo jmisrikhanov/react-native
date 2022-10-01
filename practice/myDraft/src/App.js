@@ -1,25 +1,39 @@
-// *********************State and Lifecycle******************
+// *********************State******************
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text, Button} from 'react-native';
+import {SafeAreaView, View, Text, Button, FlatList, Switch} from 'react-native';
+
+const data = [
+  {id: 0, name: 'cafe.exe', isFavourite: true},
+  {id: 1, name: 'KafaKage', isFavourite: false},
+  {id: 2, name: 'BugG', isFavourite: false},
+  {id: 3, name: 'Rock`n Code', isFavourite: true},
+  {id: 4, name: 'do(drink)', isFavourite: false},
+  {id: 5, name: 'esc', isFavourite: false},
+];
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  const increaseCounter = () => {
-    setCounter(counter + 1);
-  };
-  const decreaseCounter = () => {
-    setCounter(counter - 1);
-  };
-  const resetCounter = () => {
-    setCounter(0);
+  const [cafeList, setCafeList] = useState(data);
+  const [showOnlyFavs, setShowOnlyFavs] = useState(false);
+
+  const onFavsChange = isFavouriteSelected => {
+    setShowOnlyFavs(isFavouriteSelected);
+    isFavouriteSelected
+      ? setCafeList(cafeList.filter(cafe => cafe.isFavourite))
+      : setCafeList(data);
   };
 
   return (
     <SafeAreaView>
-      <Text style={{fontSize: 50}}>Counter: {counter}</Text>
-      <Button title="Increase Counter" onPress={increaseCounter} />
-      <Button title="Decrease Counter" onPress={decreaseCounter} />
-      <Button title="Reset Counter" onPress={resetCounter} />
+      <View>
+        <Text style={{margin: 10, textAlign: 'right'}}>
+          Show Only Favorites
+        </Text>
+        <Switch value={showOnlyFavs} onValueChange={onFavsChange} />
+      </View>
+      <FlatList
+        data={cafeList}
+        renderItem={({item}) => <Text>{item.name}</Text>}
+      />
     </SafeAreaView>
   );
 };
