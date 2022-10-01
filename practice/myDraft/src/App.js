@@ -1,23 +1,27 @@
-//*****************Custom Component********************** */
-import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import Card from './components/Card1';
+// *********************State and Lifecycle******************
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, Button} from 'react-native';
 
 const App = () => {
+  const [counter, setCounter] = useState(0);
+  const increaseCounter = () => {
+    setCounter(counter + 1);
+  };
+  const decreaseCounter = () => {
+    setCounter(counter - 1);
+  };
+  const resetCounter = () => {
+    setCounter(0);
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Card title="Ed Stark" text="Winter is coming..." />
-      <Card title="John Doe" text="lorem ipsum" />
-      <Card title="Jane Doe" text="lorem ipsum" />
+    <SafeAreaView>
+      <Text style={{fontSize: 50}}>Counter: {counter}</Text>
+      <Button title="Increase Counter" onPress={increaseCounter} />
+      <Button title="Decrease Counter" onPress={decreaseCounter} />
+      <Button title="Reset Counter" onPress={resetCounter} />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e0e0e0',
-  },
-});
 
 export default App;
