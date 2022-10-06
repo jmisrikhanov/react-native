@@ -3,19 +3,19 @@
 
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Favorites from './pages/Favorites';
 import Products from './pages/Products';
 
-const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="ProductsDrawer" component={Products} />
-        <Drawer.Screen name="FavoritesDrawer" component={Favorites} />
-      </Drawer.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="ProductsTab" component={Products} />
+        <Tab.Screen name="FavoritesTab" component={Favorites} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
