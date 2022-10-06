@@ -1,22 +1,21 @@
-// *********************React Navigation******************
+// *******************Tab Drawer******************
 // In App.js in a new project
 
 import * as React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import First from './pages/First';
-import Second from './pages/Second';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Favorites from './pages/Favorites';
+import Products from './pages/Products';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="FirstScreen" component={First} />
-        <Stack.Screen name="SecondScreen" component={Second} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="ProductsTab" component={Products} />
+        <Tab.Screen name="FavoritesTab" component={Favorites} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
