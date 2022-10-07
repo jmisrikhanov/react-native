@@ -1,6 +1,6 @@
 // Web API takes the data from database, processes it and sends it to Frontend
 
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -15,29 +15,19 @@ import UserCard from './components/UserCard/UserCard';
 const URL = 'http://jsonplaceholder.typicode.com/users';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
 
   async function fetchData() {
-    // const response = await axios.get(URL);
-    // setLoading(false);
-    // setUserList(response.data);
-
-    // above with then&catch:
-
-    axios.get(URL).then(response => {
-      setLoading(false);
-      setUserList(response.data);
-    });
+    setLoading(true);
+    const response = await axios.get(URL);
+    setLoading(false);
+    setUserList(response.data);
   }
 
   const renderUser = ({item}) => (
     <UserCard name={item.name} email={item.email} username={item.username} />
   );
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <SafeAreaView>
@@ -46,6 +36,7 @@ const App = () => {
       ) : (
         <FlatList data={userList} renderItem={renderUser} />
       )}
+      <Button title="Fetch Data" onPress={fetchData} />
     </SafeAreaView>
   );
 };
