@@ -31,7 +31,7 @@ const Products = ({navigation}) => {
   //     }
   //   };
 
-  const {loading, data, error} = useFetch(Config.API_URL);
+  const {loading, data, error} = useFetch(Config.API_PRODUCT_URL);
   console.log('render');
   console.log({loading, data: data.length, error});
   console.log('----------------------------');

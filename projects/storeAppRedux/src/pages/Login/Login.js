@@ -1,11 +1,35 @@
 import React from 'react';
-import {SafeAreaView, Text, View, Image} from 'react-native';
+import {SafeAreaView, Text, View, Image, Alert} from 'react-native';
+import {Formik} from 'formik';
 
 import styles from './Login.style';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 
-const Login = () => {
+import usePost from '../../hooks/usePost';
+import Config from 'react-native-config';
+
+const Login = ({navigation}) => {
+  const {data, post, loading, error} = usePost();
+
+  function handleLogin(values) {
+    console.log('first', values);
+    post(Config.API_AUTH_URL + '/login', values);
+  }
+
+  if (error) {
+    Alert.alert('Store', 'Error');
+  }
+
+  if (data) {
+    if (data.status === 'Error') {
+      Alert.alert('Store', 'User not found!');
+    } else {
+      navigation.navigate('ProductsPage');
+    }
+    console.log('data', data);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logo_container}>
@@ -14,11 +38,28 @@ const Login = () => {
           source={require('../../assets/login-logo.png')}
         />
       </View>
-      <View style={styles.body_container}>
-        <Input placeholder="Input user name..." />
-        <Input placeholder="Input password..." />
-        <Button text="Login" />
-      </View>
+      <Formik
+        initialValues={{username: '', password: ''}}
+        onSubmit={handleLogin}>
+        {({handleSubmit, handleChange, values}) => (
+          <View style={styles.body_container}>
+            <Input
+              placeholder="Input user name..."
+              value={values.username}
+              onType={handleChange('username')}
+              iconName="account"
+            />
+            <Input
+              placeholder="Input password..."
+              value={values.password}
+              onType={handleChange('password')}
+              iconName="onepassword"
+              isSecure
+            />
+            <Button text="Login" onPress={handleSubmit} loading={loading} />
+          </View>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };
