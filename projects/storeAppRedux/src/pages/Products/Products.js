@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, Button, View} from 'react-native';
+import {FlatList} from 'react-native';
 import Config from 'react-native-config';
 import axios from 'axios';
 
@@ -54,15 +54,7 @@ const Products = ({navigation}) => {
     return <Error />;
   }
 
-  return (
-    <View>
-      <Button
-        title="LogOut"
-        onPress={() => dispatch({type: 'SET_USER', payload: {user: null}})}
-      />
-      <FlatList data={data} renderItem={renderProduct} />
-    </View>
-  );
+  return <FlatList data={data} renderItem={renderProduct} />;
 };
 
 export default Products;
