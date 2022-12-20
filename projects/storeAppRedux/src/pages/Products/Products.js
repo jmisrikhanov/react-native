@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, Button, View} from 'react-native';
 import Config from 'react-native-config';
 import axios from 'axios';
 
@@ -7,6 +7,7 @@ import ProductCard from '../../components/ProductCard';
 import useFetch from '../../hooks/useFetch';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
+import {useDispatch} from 'react-redux';
 
 const Products = ({navigation}) => {
   //   const [error, setError] = useState(null);
@@ -31,6 +32,7 @@ const Products = ({navigation}) => {
   //     }
   //   };
 
+  const dispatch = useDispatch();
   const {loading, data, error} = useFetch(Config.API_PRODUCT_URL);
   console.log('render');
   console.log({loading, data: data.length, error});
@@ -52,7 +54,15 @@ const Products = ({navigation}) => {
     return <Error />;
   }
 
-  return <FlatList data={data} renderItem={renderProduct} />;
+  return (
+    <View>
+      <Button
+        title="LogOut"
+        onPress={() => dispatch({type: 'SET_USER', payload: {user: null}})}
+      />
+      <FlatList data={data} renderItem={renderProduct} />
+    </View>
+  );
 };
 
 export default Products;
